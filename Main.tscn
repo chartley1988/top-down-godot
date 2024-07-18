@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=3 uid="uid://dp76kl6y6sjg8"]
+
+[ext_resource type="Script" path="res://main.gd" id="1_frcqg"]
+[ext_resource type="PackedScene" uid="uid://by04wv5752phs" path="res://scenes/map/map.tscn" id="2_pgfsg"]
+
+[node name="Main" type="Node2D"]
+position = Vector2(2.08165e-12, 2.08165e-12)
+script = ExtResource("1_frcqg")
+
+[node name="map" parent="." instance=ExtResource("2_pgfsg")]
+position = Vector2(2.08165e-12, 2.08165e-12)
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(2.08165e-12, 2.08165e-12)
+anchor_mode = 0
