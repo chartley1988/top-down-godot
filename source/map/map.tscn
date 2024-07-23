@@ -1,0 +1,37 @@
+[gd_scene load_steps=5 format=3 uid="uid://by04wv5752phs"]
+
+[ext_resource type="PackedScene" uid="uid://cen0liuh3ye5r" path="res://game/maps/world.tscn" id="1_mjex2"]
+[ext_resource type="PackedScene" uid="uid://xf7n7evb8dpu" path="res://source/entites/entity.tscn" id="2_iwpov"]
+[ext_resource type="PackedScene" uid="uid://dokchx11lm4qb" path="res://source/entites/chest.tscn" id="3_skxs3"]
+[ext_resource type="PackedScene" uid="uid://b68kjraohmaxe" path="res://source/entites/player.tscn" id="4_vfr8x"]
+
+[node name="map" type="Node2D"]
+
+[node name="world2" parent="." instance=ExtResource("1_mjex2")]
+
+[node name="Entity" parent="world2" instance=ExtResource("2_iwpov")]
+position = Vector2(128, 224)
+
+[node name="Entity2" parent="world2" instance=ExtResource("2_iwpov")]
+position = Vector2(128, 240)
+
+[node name="Entity3" parent="world2" instance=ExtResource("2_iwpov")]
+position = Vector2(160, 224)
+
+[node name="Entity4" parent="world2" instance=ExtResource("2_iwpov")]
+position = Vector2(144, 224)
+
+[node name="Entity5" parent="world2" instance=ExtResource("2_iwpov")]
+position = Vector2(160, 240)
+
+[node name="chest" parent="world2" instance=ExtResource("3_skxs3")]
+position = Vector2(432, 144)
+
+[node name="chest2" parent="world2" instance=ExtResource("3_skxs3")]
+position = Vector2(336, 144)
+
+[node name="chest3" parent="world2" instance=ExtResource("3_skxs3")]
+position = Vector2(112, 176)
+
+[node name="Player" parent="world2" instance=ExtResource("4_vfr8x")]
+position = Vector2(48, 80)
