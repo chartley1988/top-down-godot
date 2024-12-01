@@ -1,49 +1,57 @@
 
-extends CharacterBody2D
+extends Area2D
+
 
 # Debug Variables
 const DEBUG_LOG_KEYPRESS = false
 
-const WALK_SPEED  = 100
+const WALK_SPEED  = 5
+const TILE_SIZE = 16
 
+const INPUTS = {
+	"ui_right": Vector2.RIGHT,
+	"ui_left": Vector2.LEFT,
+	"ui_up": Vector2.UP,
+	"ui_down": Vector2.DOWN
+}
+
+var moving = false
+
+@onready var ray = $RayCast2D
 
 func _ready():
-	pass # Replace with function body.
+	position = position.snapped(Vector2.ONE * TILE_SIZE)
+	print(position/16)
 
 
 func _process(delta):
 	pass
 
 
-func _physics_process(delta):
-	get_player_input()
-	move_player()
+func _unhandled_key_input(event: InputEvent) -> void:
+	if moving:
+		return
+	for dir in INPUTS.keys():
+		if event.is_action_pressed(dir):
+			print(dir)
+			move(dir)
 
 
-func _input(event):
-	if not event is InputEventMouseMotion:
-		if DEBUG_LOG_KEYPRESS:
-			print(event.as_text())
-		return event.as_text()
+func move(dir):
+	ray.target_position = INPUTS[dir] * TILE_SIZE
+	ray.force_raycast_update()
+	if !ray.is_colliding():
+		var tween = create_tween()
+		tween.tween_property(
+			self, 
+			"position",
+			position + INPUTS[dir] * TILE_SIZE, 1.0/WALK_SPEED).set_trans(Tween.TRANS_SINE)
+		moving = true
+		await tween.finished
+		moving = false
+		print(position/TILE_SIZE)
 
 
-func move_player():
-	# self.velocity = Vector2(0,0)
-	self.move_and_slide()
-	self.velocity = Vector2(0,0)
-
+func _input(event: InputEvent) -> void:
 	pass
 
-
-func get_player_input():
-	if Input.is_action_pressed("ui_left"):
-		self.velocity.x -= WALK_SPEED
-
-	if Input.is_action_pressed("ui_right"):
-		self.velocity.x += WALK_SPEED
-
-	if Input.is_action_pressed("ui_up"):
-		self.velocity.y -= WALK_SPEED
-
-	if Input.is_action_pressed("ui_down"):
-		self.velocity.y += WALK_SPEED
