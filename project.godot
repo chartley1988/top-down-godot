@@ -26,5 +26,5 @@ window/stretch/mode="viewport"
 [rendering]
 
 textures/canvas_textures/default_texture_filter=0
-renderer/rendering_method="mobile"
 environment/defaults/default_clear_color=Color(0.105882, 0.152941, 0.203922, 1)
+2d/snap/snap_2d_transforms_to_pixel=true
